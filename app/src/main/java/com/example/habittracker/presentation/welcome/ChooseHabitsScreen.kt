@@ -56,7 +56,6 @@ fun ChooseHabitsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
             .background(color = colorResource(id = R.color.background)),
     ) {
         Row(
@@ -104,7 +103,6 @@ fun ChooseHabitsScreen(
         )
         Box(
             contentAlignment = Alignment.BottomEnd,
-            modifier = Modifier.fillMaxWidth().weight(1f)
         ){
             Habits(
                 listOf(
@@ -171,7 +169,7 @@ fun Habits(
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().height(LocalConfiguration.current.screenHeightDp.dp),
         contentPadding = PaddingValues(15.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
