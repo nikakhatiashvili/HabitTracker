@@ -84,80 +84,84 @@ fun ChooseHabitsScreen(
             trackColor = colorResource(id = R.color.gray),
             progress = 0.33f
         )
+        Column(
+//            modifier =Modifier.verticalScroll(rememberScrollState())
+        ) {
 
-        Text(
-            text = "What habits do you want to work on?",
-            fontSize = 23.sp,
-            fontWeight = FontWeight.Bold,
-            color = colorResource(id = R.color.white),
-            modifier = Modifier
-                .width(LocalConfiguration.current.screenWidthDp.dp / 2 + 100.dp)
-                .padding(start = 20.dp, top = 26.dp)
-        )
-        Text(
-            text = "Choose one or more habits.",
-            fontSize = 16.sp,
-            color = colorResource(id = R.color.gray),
-            modifier = Modifier
-                .padding(start = 20.dp, top = 10.dp)
-        )
-        Box(
-            contentAlignment = Alignment.BottomEnd,
-        ){
-            Habits(
-                listOf(
-                    Habit("Workout", R.drawable.dumbbell_svgrepo_com),
-                    Habit("Read more", R.drawable.book_open_svgrepo_com),
-                    Habit("Take pictures", R.drawable.camera_svgrepo_com),
-                    Habit("Planning", R.drawable.simple_calendar_svgrepo_com),
-                    Habit("Go to bed", R.drawable.bed_svgrepo_com),
-                    Habit("Workout", R.drawable.dumbbell_svgrepo_com),
-                    Habit("Workout", R.drawable.dumbbell_svgrepo_com),
-                )
+            Text(
+                text = "What habits do you want to work on?",
+                fontSize = 23.sp,
+                fontWeight = FontWeight.Bold,
+                color = colorResource(id = R.color.white),
+                modifier = Modifier
+                    .width(LocalConfiguration.current.screenWidthDp.dp / 2 + 100.dp)
+                    .padding(start = 20.dp, top = 26.dp)
             )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                TextButton(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(
-                        Color.Transparent,
-                        colorResource(id = R.color.white)
-                    ),
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(40))
-                        .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp)
-                        .width(LocalConfiguration.current.screenWidthDp.dp / 2 - 30.dp),
-                    contentPadding = PaddingValues(20.dp),
-                    border = BorderStroke(1.dp, Color.White)
-                ) {
-                    Text(
-                        text = "Skip",
-                        fontSize = 19.sp,
-                    )
+            Text(
+                text = "Choose one or more habits.",
+                fontSize = 16.sp,
+                color = colorResource(id = R.color.gray),
+                modifier = Modifier
+                    .padding(start = 20.dp, top = 10.dp)
+            )
+            Box(
+                contentAlignment = Alignment.BottomCenter,
 
-                }
-                TextButton(
-                    onClick = { },
-                    colors = ButtonDefaults.buttonColors(
-                        colorResource(id = R.color.red),
-                        colorResource(id = R.color.white)
-                    ),
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(40))
-                        .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp)
-                        .width(LocalConfiguration.current.screenWidthDp.dp / 2 - 30.dp),
-                    contentPadding = PaddingValues(20.dp),
-                ) {
-                    Text(
-                        text = "Proceed",
-                        fontSize = 19.sp,
+                ){
+                Habits(
+                    listOf(
+                        Habit("Workout", R.drawable.dumbbell_svgrepo_com),
+                        Habit("Read more", R.drawable.book_open_svgrepo_com),
+                        Habit("Take pictures", R.drawable.camera_svgrepo_com),
+                        Habit("Planning", R.drawable.simple_calendar_svgrepo_com),
+                        Habit("Go to bed", R.drawable.bed_svgrepo_com),
+                        Habit("Workout", R.drawable.dumbbell_svgrepo_com),
+                        Habit("Workout", R.drawable.dumbbell_svgrepo_com),
                     )
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    TextButton(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(
+                            Color.Transparent,
+                            colorResource(id = R.color.white)
+                        ),
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(40))
+                            .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp)
+                            .width(LocalConfiguration.current.screenWidthDp.dp / 2 - 30.dp),
+                        contentPadding = PaddingValues(20.dp),
+                        border = BorderStroke(1.dp, Color.White)
+                    ) {
+                        Text(
+                            text = "Skip",
+                            fontSize = 19.sp,
+                        )
 
+                    }
+                    TextButton(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(
+                            colorResource(id = R.color.red),
+                            colorResource(id = R.color.white)
+                        ),
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(40))
+                            .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp)
+                            .width(LocalConfiguration.current.screenWidthDp.dp / 2 - 30.dp),
+                        contentPadding = PaddingValues(20.dp),
+                    ) {
+                        Text(
+                            text = "Proceed",
+                            fontSize = 19.sp,
+                        )
+
+                    }
                 }
             }
-
         }
     }
 }
@@ -169,7 +173,9 @@ fun Habits(
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
-            .fillMaxWidth().height(LocalConfiguration.current.screenHeightDp.dp),
+            .fillMaxWidth()
+            .padding(bottom = 50.dp),
+
         contentPadding = PaddingValues(15.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
