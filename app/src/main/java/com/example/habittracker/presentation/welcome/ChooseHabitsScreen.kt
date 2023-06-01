@@ -1,5 +1,6 @@
 package com.example.habittracker.presentation.welcome
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,16 +10,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -56,7 +53,6 @@ fun ChooseHabitsScreen() {
 fun ChooseHabitsScreen(
     string: String
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -106,8 +102,6 @@ fun ChooseHabitsScreen(
             modifier = Modifier
                 .padding(start = 20.dp, top = 10.dp)
         )
-
-
         Box(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier.fillMaxWidth().weight(1f)
@@ -123,7 +117,29 @@ fun ChooseHabitsScreen(
                     Habit("Workout", R.drawable.dumbbell_svgrepo_com),
                 )
             )
-            Row() {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                TextButton(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(
+                        Color.Transparent,
+                        colorResource(id = R.color.white)
+                    ),
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(40))
+                        .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp)
+                        .width(LocalConfiguration.current.screenWidthDp.dp / 2 - 30.dp),
+                    contentPadding = PaddingValues(20.dp),
+                    border = BorderStroke(1.dp, Color.White)
+                ) {
+                    Text(
+                        text = "Skip",
+                        fontSize = 19.sp,
+                    )
+
+                }
                 TextButton(
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(
@@ -131,17 +147,16 @@ fun ChooseHabitsScreen(
                         colorResource(id = R.color.white)
                     ),
                     modifier = Modifier
-                        .fillMaxWidth()
                         .clip(RoundedCornerShape(40))
-                        .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp),
-                    contentPadding = PaddingValues(20.dp)
+                        .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp)
+                        .width(LocalConfiguration.current.screenWidthDp.dp / 2 - 30.dp),
+                    contentPadding = PaddingValues(20.dp),
                 ) {
-                    //Box(modifier = Modifier.height(20.dp)){
                     Text(
-                        text = "Let's start",
+                        text = "Proceed",
                         fontSize = 19.sp,
                     )
-                    //}
+
                 }
             }
 
