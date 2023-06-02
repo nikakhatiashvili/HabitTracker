@@ -161,10 +161,10 @@ fun ChooseHabitsScreen(
                 text = "Proceed",
                 fontSize = 19.sp,
             )
+
         }
     }
 }
-
 
 @Composable
 fun Habits(
@@ -244,5 +244,3 @@ data class Habit(
     val name: String,
     val image: Int
 )
-
-
