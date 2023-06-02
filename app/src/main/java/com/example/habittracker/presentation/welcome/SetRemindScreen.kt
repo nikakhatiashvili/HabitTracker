@@ -1,7 +1,6 @@
 package com.example.habittracker.presentation.welcome
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -35,7 +34,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,14 +44,7 @@ import com.example.habittracker.presentation.common.RoundedLinearProgressIndicat
 import com.example.habittracker.ui.theme.HabitTrackerTheme
 
 @Composable
-fun ChooseHabitsScreen() {
-    ChooseHabitsScreen("s")
-}
-
-@Composable
-fun ChooseHabitsScreen(
-    string: String
-) {
+fun SetRemindScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -70,7 +61,7 @@ fun ChooseHabitsScreen(
             ) {
                 BackButtonImage(start = 20.dp, top = 16.dp)
                 Text(
-                    text = "1/3",
+                    text = "2/3",
                     fontSize = 25.sp,
                     color = colorResource(id = R.color.white),
                     modifier = Modifier.padding(end = 16.dp, top = 11.dp)
@@ -84,43 +75,31 @@ fun ChooseHabitsScreen(
                     .padding(top = 10.dp, start = 20.dp, end = 16.dp), // Rounded edges
                 color = colorResource(id = R.color.dark_gray),
                 trackColor = colorResource(id = R.color.gray),
-                progress = 0.33f
+                progress = 0.70f
             )
             Column(
-                Modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    text = "What habits do you want to work on?",
+                    text = "When do you want us to remind you?",
                     fontSize = 23.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.white),
                     modifier = Modifier
-                        .width(LocalConfiguration.current.screenWidthDp.dp / 2 + 100.dp)
+                        .width(LocalConfiguration.current.screenWidthDp.dp / 2 + 120.dp)
                         .padding(start = 20.dp, top = 26.dp)
                 )
-                Text(
-                    text = "Choose one or more habits.",
-                    fontSize = 16.sp,
-                    color = colorResource(id = R.color.gray),
-                    modifier = Modifier
-                        .padding(start = 20.dp, top = 10.dp)
-                )
-                Habits(
+                SetTimes(
                     listOf(
-                        Habit("Workout", R.drawable.dumbbell_svgrepo_com),
-                        Habit("Read more", R.drawable.book_open_svgrepo_com),
-                        Habit("Take pictures", R.drawable.camera_svgrepo_com),
-                        Habit("Planning", R.drawable.simple_calendar_svgrepo_com),
-                        Habit("Go to bed", R.drawable.bed_svgrepo_com),
-                        Habit("Workout", R.drawable.dumbbell_svgrepo_com),
-                        Habit("Workout", R.drawable.dumbbell_svgrepo_com),
+                        Dates("Morning","6:00AM"),
+                        Dates("Noon","12:00PM"),
+                        Dates("Evening","6:00PM"),
                     )
                 )
             }
         }
-
         TextButton(
             onClick = { },
             colors = ButtonDefaults.buttonColors(
@@ -163,8 +142,8 @@ fun ChooseHabitsScreen(
 }
 
 @Composable
-fun Habits(
-    habits: List<Habit>
+fun SetTimes(
+    list: List<Dates>
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -176,15 +155,14 @@ fun Habits(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        items(habits) { it ->
-            HabitBox(it)
+        items(list) { it ->
+            TimeBox(it)
         }
     }
 }
 
 @Composable
-fun HabitBox(habit: Habit) {
-
+fun TimeBox(habit: Dates) {
     val selected = remember { mutableStateOf(false) }
     val color =
         if (selected.value) Color.Transparent else colorResource(id = R.color.lighter_background)
@@ -203,13 +181,14 @@ fun HabitBox(habit: Habit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Image(
-            painter = painterResource(id = habit.image),
-            contentDescription = null,
-            modifier = Modifier.height(80.dp)
+        Text(
+            text = habit.time,
+            color = colorResource(id = R.color.white),
+            fontSize = 30.sp,
+            modifier = Modifier.padding(top = 10.dp)
         )
         Text(
-            text = habit.name,
+            text = habit.dateTime,
             color = colorResource(id = R.color.gray),
             fontSize = 18.sp,
             modifier = Modifier.padding(top = 10.dp)
@@ -219,22 +198,21 @@ fun HabitBox(habit: Habit) {
 
 @Preview
 @Composable
-fun HabitboxPreview() {
+fun TimeboxPreview() {
     HabitTrackerTheme() {
-        HabitBox(habit = Habit("workout", R.drawable.dumbbell_svgrepo_com))
+        TimeBox(habit = Dates("Evening","6:00AM"))
     }
 }
 
-
-@Preview
-@Composable
-fun ChooseHabitsScreenPreview() {
-    HabitTrackerTheme {
-        ChooseHabitsScreen(string = "")
-    }
-}
-
-data class Habit(
-    val name: String,
-    val image: Int
+data class Dates(
+    val dateTime: String,
+    val time: String,
 )
+
+@Composable
+@Preview
+fun SetRemindScreenPreview() {
+    HabitTrackerTheme {
+        SetRemindScreen()
+    }
+}

@@ -105,12 +105,10 @@ fun WelcomeScreen(
                     .padding(start = 16.dp, end = 16.dp, top = 60.dp, bottom = 20.dp),
                 contentPadding = PaddingValues(20.dp)
             ) {
-                //Box(modifier = Modifier.height(20.dp)){
                     Text(
                         text = "Let's start",
                         fontSize = 19.sp,
                     )
-                //}
             }
             Text(
                 text = "Need an account? Sign up here",
